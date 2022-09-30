@@ -18,8 +18,9 @@ async def message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def top_products(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    async with aiohttp.ClientSession() as session:
-        async with session.get("http://127.0.0.1:8000/api/products/?ordering=-cost") as response:
+    async with aiohttp.ClientSession(trust_env=True) as session:
+        # async with session.get("http://127.0.0.1:8000/api/products/?ordering=-cost") as response:
+        async with session.get("http://172.18.0.1:8000/api/products/?ordering=-cost") as response:
             products = await response.json()
     result = ""
     for product in products["results"]:

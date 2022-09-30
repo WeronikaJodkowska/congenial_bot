@@ -1,11 +1,14 @@
 version: '3.3'
 services:
 
-  congenial_blog:
-    image: congenial_blog:latest
-     ports:
+  congenial_bot:
+    image: congenial_bot:latest
+    ports:
       - "5000:5000"
     volumes:
       - ./:/app/
+    environment:
+      - BOT_TOKEN=5526476535:AAFuU4xZCxgb2yBPXAwpOW2msuLvtOGifDY
+      - CHAT_ID=1242849836
     command: |
-      python server.py
+      python bot.py
