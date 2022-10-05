@@ -1,7 +1,10 @@
 version: '3.3'
 services:
 
-  congenial_bot:
+  redis:
+    image: redis:latest
+
+  server: &base_container
     image: congenial_bot:latest
     ports:
       - "5000:5000"
@@ -10,5 +13,12 @@ services:
     environment:
       - BOT_TOKEN=5526476535:AAFuU4xZCxgb2yBPXAwpOW2msuLvtOGifDY
       - CHAT_ID=1242849836
+      - REDIS=redis://redis
+    command: |
+      python server.py
+
+  bot:
+    <<: *base_container
+    ports: []
     command: |
       python bot.py
